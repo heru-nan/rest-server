@@ -46,6 +46,13 @@ app.post("/usuario", function (req, res) {
   let body = req.body;
   let { nombre, email, password, role } = req.body;
 
+  if(!nombre || !email || !password){
+    return res.status(400).json({
+      ok: false,
+      err: {message: "Solicitud de usuario incompleta"}
+    });
+  }
+
   let user = new Usuario({
     nombre,
     email,

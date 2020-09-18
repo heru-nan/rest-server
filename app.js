@@ -1,12 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const config = require("./config");
+//const config = require("./config");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
+const routes = require('./routes');
+
 const app = express();
 
-const usuarioRoute = require("./routes/usuario.js");
 
 mongoose.connect(
   process.env.MONGODB_URI,
@@ -20,7 +21,7 @@ mongoose.connect(
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(usuarioRoute);
+app.use(routes);
 
 app.listen(process.env.PORT, function () {
   console.log(`server on ${process.env.PORT}`);
